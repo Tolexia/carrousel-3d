@@ -10,34 +10,62 @@ html, body {
 body
 {
     background: linear-gradient(0deg, rgb(3, 102, 122) 0%, rgb(1, 38, 46) 100%);
-    transform: rotateX(-35deg);
+    transform: rotateX(5deg) ;
     transform-style: preserve-3d;
 }
 section
 {
     position: relative;
-    height: 50vw;
+    height: 50vh;
     width: 100vw;
     transform-style: preserve-3d;
-    animation: spin 7s infinite linear;
+    transform-origin: center;
+    /* animation: spin 60s infinite linear; */
+    transform: rotateY(255deg);
 }
+
+/* 
+    FROM : https://daily-dev-tips.com/posts/creating-a-3d-cylinder-shape-in-css/
+    
+    pi: 3.14159265358979;
+    cylinder-width: 100vw;
+    face-count: 8;
+    face-deg: (360deg / face-count) for a full cylinder
+    face-width: (cylinder-width / face-count) 
+    face-shift: (cylinder-width / pi / 2)
+    transform: rotateY(calc(face-deg * var(--index))) translateZ(
+      calc(face-shift - -6px)
+    );
+    */
 div 
 {
     height: 8em;
     width: 3em;
-    background: rgba(112, 218, 239, 0.244);
-    filter: blur(2px);
-    /* margin-right: 1em; */
+    background: rgb(202, 243, 252);
     position: absolute;
-  background-color: #da0060;
-  opacity: 0.7;
-  height: 100%;
-  width: calc(100vw / 8);
-  top: 50%;
-  left: 50%;
-  transform: rotateY(calc(45deg * var(--index))) translateZ(
-      calc((100vw / 3.14 / 2) - -6px)
+    box-shadow: 0 2px 5px grey;
+    height: 60%;
+    width: calc(100vw / 8);
+    top: 50%;
+    left: 50%;
+
+    /* rotateY should be "calc(22.5deg..." for a perfect 180deg effect with 8 faces but I wanted that it went behind a bit  */
+    transform: rotateY(calc(30deg * var(--index))) translateZ(
+      calc((100vw / 3.14159265358979 / 1.25) - -6px)
+    /* 1.25 is an adjustment constant that I was forced to had because of the rotateY settings */
     );
+}
+h2 {
+    position: relative;
+    transform-style: preserve-3d;
+    /* transform:  perspective(400px); */
+}
+span
+{
+    position: absolute;
+    transform-style: preserve-3d;
+    /* transform: translateZ(50px) translateX(50px); */
+    /* z-index: 5; */
 }
 @keyframes spin {
     to {
