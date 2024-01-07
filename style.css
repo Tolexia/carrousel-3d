@@ -13,11 +13,18 @@ body
     transform: rotateX(5deg) ;
     transform-style: preserve-3d;
 }
-section
+section#carrousel
 {
+    --pi: 3.14159265358979;
+    --cylinderWidth: 100vw;
+    --faceCount: 8;
+    --faceDeg : calc(360deg / var(--faceCount));
+    --faceWidth: calc(var(--cylinderWidth) / var(--faceCount)) ;
+    --faceShift: calc(var(--cylinderWidth) / var(--pi) / 2);
+
     position: relative;
     height: 50vh;
-    width: 100vw;
+    width: var(--cylinderWidth);
     transform-style: preserve-3d;
     transform-origin: center;
     /* animation: spin 60s infinite linear; */
@@ -27,32 +34,40 @@ section
 /* 
     FROM : https://daily-dev-tips.com/posts/creating-a-3d-cylinder-shape-in-css/
     
-    pi: 3.14159265358979;
-    cylinder-width: 100vw;
+    --pi: 3.14159265358979;
+    cylinder-width: 80vw;
     face-count: 8;
     face-deg: (360deg / face-count) for a full cylinder
     face-width: (cylinder-width / face-count) 
-    face-shift: (cylinder-width / pi / 2)
+    face-shift: (cylinder-width / var(--pi) / 2)
     transform: rotateY(calc(face-deg * var(--index))) translateZ(
       calc(face-shift - -6px)
     );
     */
 div 
 {
-    height: 8em;
-    width: 3em;
-    background: rgb(202, 243, 252);
+    background-color: rgb(202, 243, 252);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     position: absolute;
     box-shadow: 0 2px 5px grey;
+
     height: 60%;
-    width: calc(100vw / 8);
+    width: var(--faceWidth);
     top: 50%;
     left: 50%;
 
+    /* 360deg */
+    /* transform: rotateY(calc(var(--faceDeg) * var(--index))) translateZ(
+        calc(var(--faceShift) - -6px)
+      ); */
+
+    /* ~180 deg */
     /* rotateY should be "calc(22.5deg..." for a perfect 180deg effect with 8 faces but I wanted that it went behind a bit  */
+    /* 1.25 is an adjustment constant that I was forced to had because of the rotateY settings */
     transform: rotateY(calc(30deg * var(--index))) translateZ(
       calc((100vw / 3.14159265358979 / 1.25) - -6px)
-    /* 1.25 is an adjustment constant that I was forced to had because of the rotateY settings */
     );
 }
 h2 {
@@ -73,3 +88,27 @@ span
     }
   }
   
+#carrousel > div:nth-child(1) {
+    background-image: url(./1.jpg);
+}
+#carrousel > div:nth-child(2) {
+    background-image: url(./2.jpg);
+}
+#carrousel > div:nth-child(3) {
+    background-image: url(./3.jpg);
+}
+#carrousel > div:nth-child(4) {
+    background-image: url(./4.jpg);
+}
+#carrousel > div:nth-child(5) {
+    background-image: url(./5.jpg);
+}
+#carrousel > div:nth-child(6) {
+    background-image: url(./6.jpg);
+}
+#carrousel > div:nth-child(7) {
+    background-image: url(./7.jpg);
+}
+#carrousel > div:nth-child(8) {
+    background-image: url(./8.jpg);
+}
